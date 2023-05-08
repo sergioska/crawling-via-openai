@@ -35,5 +35,6 @@
     "fs": false,
     "path": false,
     "os": false
-  }
+  },
+  "export": "next export"
 }
