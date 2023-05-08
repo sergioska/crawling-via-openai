@@ -11,7 +11,7 @@ const CodeEditor = dynamic(
     { ssr: false }
   );
 
-function InputArea({openAiKey, updateOpenAiKey}) {
+function InputArea({string: openAiKey, updateOpenAiKey}) {
 
   // Uncontrolled
   const messageInitRef = React.useRef(null);
