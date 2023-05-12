@@ -1,4 +1,16 @@
-const callOpenAi = async(content, openAiKey) => {
+interface OpenAiResponse {
+    data: {
+        choices: [
+            {
+                message: {
+                    content: string
+                }
+            }
+        ]
+    },
+    errors?: Array<{message: string}>
+};
+const callOpenAi = async(content: {}, openAiKey: string): Promise<OpenAiResponse>  => {
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         body: JSON.stringify({
@@ -11,10 +23,13 @@ const callOpenAi = async(content, openAiKey) => {
             "content-type": "application/json",
             Authorization: "Bearer " + openAiKey
         },
-    }).catch((e) => console.log(e));
+    }).catch((e) => {
+        console.log(e)
+        return e;
+    });
 
-    const data = await res.json();
-    return data;
+    const {data, errors}: OpenAiResponse = await res.json();
+    return {data, errors};
 }
 
 export default callOpenAi;
