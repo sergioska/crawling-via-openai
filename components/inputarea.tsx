@@ -42,7 +42,7 @@ function InputArea(openAiKey: {openAiKey: string}) {
 
         const dataInit = await callOpenAi(totalPrompt, openAiKey.openAiKey);
         console.log(dataInit);
-        const content = dataInit.data.choices[0].message.content;
+        const content = dataInit.choices[0].message.content;
         setMessageResponse(content);
     }
   };
