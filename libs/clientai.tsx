@@ -1,16 +1,15 @@
 interface OpenAiResponse {
-    data: {
-        choices: [
-            {
-                message: {
-                    content: string
-                }
+    choices: [
+        {
+            message: {
+                content: string
             }
-        ]
-    },
+        }
+    ]
     errors?: Array<{message: string}>
-};
-const callOpenAi = async(content: {}, openAiKey: string): Promise<OpenAiResponse>  => {
+}
+
+const callOpenAi = async(content: any, openAiKey: string): Promise<OpenAiResponse>  => {
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         body: JSON.stringify({
@@ -28,8 +27,8 @@ const callOpenAi = async(content: {}, openAiKey: string): Promise<OpenAiResponse
         return e;
     });
 
-    const {data, errors}: OpenAiResponse = await res.json();
-    return {data, errors};
+    const {choices, errors}: OpenAiResponse = await res.json();
+    return {choices, errors};
 }
 
 export default callOpenAi;
